@@ -1,0 +1,188 @@
+{
+    "configurations": [
+        {
+            "name": "(Debug) Print statistics",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/carve_debug",
+            "args": [
+                "-s",
+                "${workspaceFolder}/test/data/${input:file}"
+            ],
+            "stopAtEntry": true,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb",
+            "preLaunchTask": "build",
+            "env": {
+                "LSAN_OPTIONS":"detect_leaks=0"
+            }
+        },
+        {
+            "name": "(Debug) Print optimal seam",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/carve_debug",
+            "args": [
+                "-p",
+                "${workspaceFolder}/test/data/${input:file}"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb",
+            "preLaunchTask": "build",
+            "env": {
+                "LSAN_OPTIONS":"detect_leaks=0"
+            }
+        },
+        {
+            "name": "(Debug) Run seam carving algorithm for n steps",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/carve_debug",
+            "args": [
+                "-n${input:runs}",
+                "${workspaceFolder}/test/data/${input:file}"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb",
+            "preLaunchTask": "build",
+            "env": {
+                "LSAN_OPTIONS":"detect_leaks=0"
+            }
+        },
+        {
+            "name": "(Debug) Run full seam carving algorithm",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/carve_debug",
+            "args": [
+                "${workspaceFolder}/test/data/${input:file}"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb",
+            "preLaunchTask": "build",
+            "env": {
+                "LSAN_OPTIONS":"detect_leaks=0"
+            }
+        },
+        {
+            "name": "(Opt) Print statistics",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/carve_opt",
+            "args": [
+                "-s",
+                "${workspaceFolder}/test/data/${input:file}"
+            ],
+            "stopAtEntry": true,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb",
+            "preLaunchTask": "build"
+        },
+        {
+            "name": "(Opt) Print optimal seam",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/carve_opt",
+            "args": [
+                "-p",
+                "${workspaceFolder}/test/data/${input:file}"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb",
+            "preLaunchTask": "build"
+        },
+        {
+            "name": "(Opt) Run seam carving algorithm for n steps",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/carve_opt",
+            "args": [
+                "-n${input:runs}",
+                "${workspaceFolder}/test/data/${input:file}"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb",
+            "preLaunchTask": "build"
+        },
+        {
+            "name": "(Opt) Run full seam carving algorithm",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/carve_opt",
+            "args": [
+                "${workspaceFolder}/test/data/${input:file}"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb",
+            "preLaunchTask": "build"
+        },
+        {
+            "name": "Debug public test",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/testrunner",
+            "args": [
+                "${input:test_name}"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb",
+            "preLaunchTask": "build",
+            "env": {
+                "LSAN_OPTIONS":"detect_leaks=0"
+            }
+        }
+    ],
+    "inputs": [
+        {
+            "id": "runs",
+            "default": "10",
+            "description": "Number of algorithm steps",
+            "type": "promptString"
+        },
+        {
+            "id": "file",
+            "default": "owl.ppm",
+            "description": "Image file",
+            "type": "promptString"
+        },
+        {
+            "id": "test_name",
+            "description": "Test name",
+            "type": "pickString",
+            "options": [
+                "public.statistics.brightness_small2",
+                "public.min_path.diff_color",
+                "public.min_path.energy_small2",
+                "public.min_path.energy_wide",
+                "public.min_path.min_energy_wide_1",
+                "public.min_path.optimal_path_tall",
+                "public.carve.carve_path_small2",
+            ]
+        }
+    ]
+}

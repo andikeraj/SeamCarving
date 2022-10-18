@@ -1,0 +1,7 @@
+// Geben Sie Ihre Tastenzuordnungen in dieser Datei ein, um die Standardwerte außer Kraft zu setzen.auto[]
+[
+    {
+        "key": "shift+cmd+l",
+        "command": "workbench.action.tasks.test"
+    }
+]
